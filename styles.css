@@ -1,0 +1,29 @@
+.image-canvas {
+    display: grid;
+    grid-template-columns: repeat(7,auto);
+    max-width: 490px;
+    margin: auto;
+}
+
+.pixel-canvas {
+    display: grid;
+    grid-template-columns: repeat(7,auto);
+    max-width: 490px;
+    margin: auto;
+}
+
+.line {
+    display: flex;
+}
+
+.pixel-box {
+    display: block;
+    width: 10px;
+    height: 10px;
+}
+
+img {
+    width: 100%;
+    max-width: 490px;
+    border: 1px solid red;
+}
