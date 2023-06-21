@@ -18,7 +18,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -38,34 +38,6 @@
             overflow: hidden;
         }
         
-        .trigger_fworks {
-            width: 275px;
-            color: white;
-            font-weight: bold;
-            text-align: center;
-            padding: 20px 10px;
-            margin: 30px auto;
-            background: blue;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        
-        .fireworks {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            height: 100vh;
-            width: 100vw;
-        }
-        
-        .fireworks canvas {
-            top: 0;
-            position: absolute;
-            z-index: 1;
-        }
-        
         #ya-message {
             position: relative;
             z-index: 2;
@@ -78,12 +50,15 @@
         }
         
         .pixel-canvas {
-            background-color: url(images/imagebase.png);
+            background-image: url(images/base.png);
         }
         
         .container {
             display: flex;
             justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
         }
     </style>
 </head>
@@ -92,32 +67,14 @@
     <div id="overlay">
         <div id="overlay-message">Prêt pour le spectacle?</div>
     </div>
-    <div class="fireworks"></div>
-    <!-- <div class="image-canvas">
-        <img src="./images/part1.png" alt="">
-        <img src="./images/part2.png" alt="">
-        <img src="./images/part3.png" alt="">
-        <img src="./images/part4.png" alt="">
-        <img src="./images/part5.png" alt="">
-        <img src="./images/part6.png" alt="">
-        <img src="./images/part7.png" alt="">
-        <img src="./images/part8.png" alt="">
-        <img src="./images/part9.png" alt="">
-        <img src="./images/part10.png" alt="">
-        <img src="./images/part11.png" alt="">
-        <img src="./images/part12.png" alt="">
-        <img src="./images/part13.png" alt="">
-        <img src="./images/part14.png" alt="">
-    </div> -->
+
 
     <div class="pixelbox" style="background-color: rgb();"></div>
 
-    <div class="container">
-        <div class="pixel-canvas">
+    <div id="canvas" class="container">
+        <div class="pixel-canvas" id="bloc">
             <div class="student-block">
-                <!-- REMPLIR CI DESSOUS -->
-                <!-- conbl aprés avoir ajouté le snippet -->
-                <!-- ***** line ***** -->
+
                 <div class="line">
                     <div class="pixel-box" style="background-color: #e0b184"></div>
                     <div class="pixel-box" style="background-color: #e1ae80"></div>
@@ -3754,45 +3711,23 @@
         var playButton = document.getElementById("overlay");
         playButton.addEventListener("click", playSound);
 
-        function createFirework(x, y) {
-            var firework = document.createElement("div");
-            firework.className = "firework";
-            firework.style.left = x + "px";
-            firework.style.top = y + "px";
-            document.body.appendChild(firework);
+        var studentBlocks = document.querySelectorAll('.student-block');
+        var blocPhoto = document.getElementById('bloc');
 
-            // Animation de la particule de feu d'artifice
-            var animation = firework.animate([{
-                opacity: 1,
-                transform: "scale(1)"
-            }, {
-                opacity: 0,
-                transform: "scale(2)"
-            }], {
-                duration: 1000
+        // Parcourir tous les éléments et ajouter un gestionnaire d'événements au survol
+        studentBlocks.forEach(function(studentBlock) {
+            blocPhoto.addEventListener('mouseover', function() {
+                // Cacher le contenu de la balise div
+                studentBlock.style.visibility = 'hidden';
             });
 
-            // Suppression de la particule une fois l'animation terminée
-            animation.onfinish = function() {
-                firework.remove();
-            };
-        }
-
-        // Fonction pour gérer le clic de l'utilisateur
-        function handleClick(event) {
-            var x = event.clientX;
-            var y = event.clientY;
-
-            // Créer plusieurs particules de feu d'artifice
-            for (var i = 0; i < 10; i++) {
-                createFirework(x, y);
-            }
-        }
-
-        // Attacher la fonction au clic sur la page
-        document.addEventListener("click", handleClick);
+            blocPhoto.addEventListener('mouseout', function() {
+                // Réafficher le contenu de la balise div
+                studentBlock.style.visibility = 'visible';
+            });
+        });
     </script>
-    <script src="fireworks.js"></script>
+
 </body>
 </body>
 
